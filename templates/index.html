@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>剧本杀多智能体对话</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="chat-container">
+        <div class="chat-header">
+            <div>剧本杀多角色对话</div>
+            <div class="agent-controls">
+                <div class="smart-toggle" id="smart-toggle">
+                    <span>智能选角</span>
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="smart-mode">
+                        <span class="toggle-slider"></span>
+                    </label>
+                </div>
+                <div class="agent-selector" id="agent-selector">
+                    <label for="agent-select">角色: </label>
+                    <select id="agent-select">
+                        <!-- 将由JavaScript动态填充 -->
+                    </select>
+                </div>
+                <button id="reset-button" class="reset-button">重置剧情</button>
+            </div>
+        </div>
+        <div class="status-indicator" id="status-indicator">当前模式：手动选角</div>
+        <div class="dispatcher-info" id="dispatcher-info"></div>
+        <div class="messages" id="messages">
+            <div class="message bot-message">
+                <div class="agent-label">系统</div>
+                欢迎来到剧本杀游戏！请从上方选择一个角色开始对话，或开启智能选角模式
+            </div>
+        </div>
+        <div class="typing-indicator" id="typing">正在思考...</div>
+        <div class="input-area">
+            <input type="text" id="user-input" placeholder="在此输入您的对话内容..." autocomplete="off">
+            <button id="send-button">发送</button>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/chat.js') }}"></script>
+</body>
+</html> 
