@@ -1,111 +1,111 @@
-# Coze 多智能体对话 Web 应用
+# Multi-Agent Chat Group with Coze
 
-这是一个基于 Flask 框架的 Web 应用，用于与 Coze 平台多个 Agent 进行对话。
+A Flask-based web application for interacting with multiple Agents on the Coze platform.
 
-## 功能特点
+## Features
 
-- 多智能体支持，可以选择不同的智能体进行对话
-- 智能选择功能，自动根据问题分配最适合的智能体
-- 为每个智能体独立维护对话上下文
-- 实时响应显示
-- 简洁美观的界面设计
-- 支持重置特定智能体或所有对话历史
+- Multi-agent support with the ability to choose different agents for conversation
+- Intelligent selection feature that automatically assigns the most suitable agent based on the question
+- Independent conversation context maintenance for each agent
+- Real-time response display
+- Clean and beautiful interface design
+- Support for resetting specific agent or all conversation history
 
-## 项目结构
+## Project Structure
 
 ```
-├── app.py           # 主应用和路由
-├── config.py        # 配置文件（智能体和API设置）
-├── dispatcher.py    # 调度相关逻辑
-├── requirements.txt # 依赖包
-├── static/          # 静态资源
-└── templates/       # HTML模板
-    └── index.html   # 主页模板
+├── app.py           # Main application and routes
+├── config.py        # Configuration file (agents and API settings)
+├── dispatcher.py    # Dispatch-related logic
+├── requirements.txt # Dependencies
+├── static/          # Static resources
+└── templates/       # HTML templates
+    └── index.html   # Main page template
 ```
 
-## 安装步骤
+## Installation
 
-1. 克隆或下载此仓库
+1. Clone or download this repository
 
-2. 安装依赖包
+2. Install dependencies
 
 ```bash
 pip install -r requirements.txt
 ```
 
-3. 设置环境变量（可选）
+3. Set environment variables (optional)
 
-如果需要使用非默认的 Coze API 地址，可以创建一个 `.env` 文件并设置：
+If you need to use a non-default Coze API address, create a `.env` file and set:
 
 ```
-COZE_API_BASE=你的API地址
+COZE_API_BASE=your_api_address
 ```
 
-## 运行应用
+## Running the Application
 
 ```bash
 python app.py
 ```
 
-应用将在本地运行，访问 http://127.0.0.1:5000/ 即可使用。
+The application will run locally, accessible at http://127.0.0.1:5000/
 
-## 自定义设置
+## Customization
 
-在 `config.py` 文件中，您可以修改以下参数：
+In the `config.py` file, you can modify the following parameters:
 
-- `COZE_API_TOKEN`: 您的 Coze API 令牌
-- `AVAILABLE_AGENTS`: 定义可用的智能体列表，包括ID、名称和描述
+- `COZE_API_TOKEN`: Your Coze API token
+- `AVAILABLE_AGENTS`: Define the list of available agents, including ID, name, and description
   
 ```python
 AVAILABLE_AGENTS = [
     {
-        "id": "您的Bot ID",
-        "name": "智能体名称",
-        "description": "智能体描述"
+        "id": "Your Bot ID",
+        "name": "Agent Name",
+        "description": "Agent Description"
     },
-    # 添加更多智能体...
+    # Add more agents...
 ]
 ```
 
-- `DISPATCHER_AGENT`: 调度者智能体的配置
+- `DISPATCHER_AGENT`: Configuration for the dispatcher agent
 
 ```python
 DISPATCHER_AGENT = {
-    "id": "您的调度者Bot ID",
-    "name": "智能调度员",
-    "description": "根据用户问题选择合适的智能体"
+    "id": "Your Dispatcher Bot ID",
+    "name": "Intelligent Dispatcher",
+    "description": "Selects the appropriate agent based on user questions"
 }
 ```
 
-## 调度逻辑扩展
+## Extending Dispatch Logic
 
-如需自定义或扩展调度逻辑，可以修改 `dispatcher.py` 文件中的相关函数：
+To customize or extend the dispatch logic, modify the relevant functions in `dispatcher.py`:
 
-- `build_dispatch_prompt`: 定义发送给调度者的提示词
-- `extract_agent_from_response`: 从调度者回复中提取智能体信息
-- `extract_analysis`: 提取并格式化调度分析结果
-- `process_dispatch`: 整体调度处理流程
+- `build_dispatch_prompt`: Define the prompt sent to the dispatcher
+- `extract_agent_from_response`: Extract agent information from dispatcher response
+- `extract_analysis`: Extract and format dispatch analysis results
+- `process_dispatch`: Overall dispatch processing flow
 
-## 使用方法
+## Usage
 
-应用支持两种对话模式：
+The application supports two conversation modes:
 
-### 手动选择模式
-1. 从界面顶部的下拉菜单选择要对话的智能体
-2. 在输入框中输入问题并点击发送
-3. 如果要重置当前智能体的对话历史，点击"重置对话"按钮
+### Manual Selection Mode
+1. Select the agent to chat with from the dropdown menu at the top of the interface
+2. Enter your question in the input box and click send
+3. To reset the conversation history for the current agent, click the "Reset Conversation" button
 
-### 智能选择模式
-1. 点击界面顶部的"智能选择"开关启用智能选择功能
-2. 在输入框中输入任何问题
-3. 系统会自动调用调度者智能体分析您的问题
-4. 调度者会选择最适合回答您问题的智能体
-5. 所选智能体会自动回复您的问题
-6. 对话上方会显示智能选择的结果信息
+### Intelligent Selection Mode
+1. Click the "Intelligent Selection" switch at the top of the interface to enable the feature
+2. Enter any question in the input box
+3. The system will automatically call the dispatcher agent to analyze your question
+4. The dispatcher will select the most suitable agent to answer your question
+5. The selected agent will automatically respond to your question
+6. The intelligent selection results will be displayed above the conversation
 
-## 注意事项
+## Notes
 
-- 本应用使用会话（Session）来保持对话上下文，请确保浏览器允许 Cookie
-- 每个智能体的对话上下文是独立的
-- 智能选择模式下，可以一键重置所有智能体的对话历史
-- 对于生产环境部署，请在 config.py 中设置更安全的 `SESSION_SECRET` 
+- This application uses sessions to maintain conversation context, please ensure your browser allows cookies
+- Each agent's conversation context is independent
+- In intelligent selection mode, you can reset all agents' conversation history with one click
+- For production deployment, please set a more secure `SESSION_SECRET` in config.py 
