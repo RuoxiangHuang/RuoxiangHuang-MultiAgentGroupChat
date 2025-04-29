@@ -32,7 +32,7 @@ CHARACTER_DISPATCHER_AGENT = {
 }
 
 # API配置
-COZE_API_TOKEN = "pat_STpwD8k0FA2cwzSubS8pydC0dbmu6ARilhJ2TTdo7ucM1WkTmVnIZP9cR45RmRry"
+COZE_API_TOKEN = "<please_replace_with_your_token>"
 
 # 会话密钥（生产环境应改为强随机值）
 # SESSION_SECRET = os.urandom(24)  # 实际应用中设置 
